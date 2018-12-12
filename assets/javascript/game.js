@@ -4,7 +4,7 @@
 
 // Declar Variables and functions to be used
 var numberOptions = [];
-var targetNumber = Math.floor((Math.random() * 20) + 10);
+var targetNumber = Math.floor((Math.random() * 120+1));
 var wins = 0;
 var loses =0;
 $("#number-to-guess").text(targetNumber); //update div with target number
@@ -12,25 +12,35 @@ $("#number-to-guess").text(targetNumber); //update div with target number
 var counter = 0;
 function numberGeneration(object){
 for (var i = 0; i < 4; i++) {
-  object.push(Math.floor((Math.random() * 20) + 1))
+  object.push(Math.floor((Math.random() * 12+1)))
   
 };
 }
-
-
 function newGame() {
   numberOptions= [];
   numberGeneration(numberOptions);
-  targetNumber = Math.floor((Math.random() * 20) + 10);
+  targetNumber = Math.floor((Math.random() * 100+1))+18;
   $("#number-to-guess").text(targetNumber);
   counter= 0;
   console.log("the new numbers are: " + numberOptions);
-  let crystals = $('.crystal-image');
-  
-  for (var i = 0; i < numberOptions.length; i++) {
-    crystals.attr("data-crystalsvalue", numberOptions[i])
-  }
-  
+  var crystals = $('.crystal-image');
+  crystals.each(function(i){
+    console.log(this)
+    console.log(i)
+    $(this).attr("data-crystalvalue", numberOptions[i])  
+  })
+
+
+
+
+//    for (var i = 0; i < numberOptions.length; i++) {
+//       $.each(crystals, function(key, value) {
+//       crystals.attr("data-crystalvalue", numberOptions[i]);
+//       console.log(crystals)
+//       })
+// }
+
+    
       }
  
 //crystals.each(array?,callback?)
@@ -77,12 +87,14 @@ $(".crystal-image").on("click", function() {
   if (counter === targetNumber) {
     wins++;
     $("#wins").text("Wins: "+ wins );
+    $("#playerScore").text("Your Score: ")
     newGame();
   }
 
   else if (counter >= targetNumber) {
     loses++;
     $("#loses").text("Loses: "+ loses );
+    $("#playerScore").text("Your Score: ")
     newGame();
   }
 
