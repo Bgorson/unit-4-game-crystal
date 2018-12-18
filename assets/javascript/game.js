@@ -1,50 +1,30 @@
-
-
-
-
-// Declar Variables and functions to be used
+// Declare Variables and functions to be used
 var numberOptions = [];
 var targetNumber = Math.floor((Math.random() * 120+1));
 var wins = 0;
 var loses =0;
 $("#number-to-guess").text(targetNumber); //update div with target number
-
 var counter = 0;
-function numberGeneration(object){
+
+function numberGeneration(object){ //create a function to randomly generate the numbers 
 for (var i = 0; i < 4; i++) {
   object.push(Math.floor((Math.random() * 12+1)))
   
 };
 }
-function newGame() {
+function newGame() { //starts the game over with new numbers and resets values
   numberOptions= [];
   numberGeneration(numberOptions);
   targetNumber = Math.floor((Math.random() * 100+1))+18;
   $("#number-to-guess").text(targetNumber);
   counter= 0;
-  console.log("the new numbers are: " + numberOptions);
   var crystals = $('.crystal-image');
   crystals.each(function(i){
-    console.log(this)
-    console.log(i)
     $(this).attr("data-crystalvalue", numberOptions[i])  
   })
-
-
-
-
-//    for (var i = 0; i < numberOptions.length; i++) {
-//       $.each(crystals, function(key, value) {
-//       crystals.attr("data-crystalvalue", numberOptions[i]);
-//       console.log(crystals)
-//       })
-// }
-
-    
+   
       }
  
-//crystals.each(array?,callback?)
-
 numberGeneration(numberOptions);
 // Next we create a for loop to create crystals for every numberOption.
 for (var i = 0; i < numberOptions.length; i++) {
@@ -81,8 +61,7 @@ $(".crystal-image").on("click", function() {
   // Every click, from every crystal adds to the global counter.
   counter += crystalValue;
 
-  // All of the same game win-lose logic applies. So the rest remains unchanged.
-  $("#playerScore").text("Your Score: "+ counter)
+  $("#playerScore").text("Your Score: "+ counter) //update text to show my current score
 
   if (counter === targetNumber) {
     wins++;
